@@ -156,13 +156,13 @@ const setInitialOverlay = () => {
   ).style.backgroundImage = `url('${rooms[0].image}')`;
 
   document.querySelector(".room").style.backgroundImage = `${
-    rooms[0].currTemp < 25 ? coolOverlay : warmOverlay
+    rooms[0].currTemp < 25 ?  warmOverlay : coolOverlay
   }, url('${rooms[0].image}')`;
 };
 
 const setOverlay = (room) => {
   document.querySelector(".room").style.backgroundImage = `${
-    room.currTemp < 25 ? coolOverlay : warmOverlay
+    room.currTemp < 25 ? warmOverlay : coolOverlay
   }, url('${room.image}')`;
 };
 
@@ -194,6 +194,8 @@ const currentTemp = document.getElementById("temp");
 
 let selectedRoom = rooms[0].name;
 
+
+
 // Set default temperature
 currentTemp.textContent = `${rooms[0].currTemp}°`;
 
@@ -203,7 +205,7 @@ document.querySelector(".currentTemp").innerText = `${rooms[0].currTemp}°`;
 // Add new options from rooms array
 rooms.forEach((room) => {
   const option = document.createElement("option");
-  option.value = room;
+  option.value = room.name; // #fixed bug one (called room.name instead of room)
   option.textContent = room.name;
   roomSelect.appendChild(option);
 });
@@ -214,7 +216,7 @@ const setSelectedRoom = (selectedRoom) => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
   setIndicatorPoint(room.currTemp);
 
-  //   set the current stats to current room temperature
+  //  set the current stats to current room temperature
   currentTemp.textContent = `${room.currTemp}°`;
 
   // Set the current room image
@@ -229,6 +231,7 @@ const setSelectedRoom = (selectedRoom) => {
 roomSelect.addEventListener("change", function () {
   selectedRoom = this.value;
 
+
   setSelectedRoom(selectedRoom);
 });
 
@@ -240,10 +243,11 @@ defaultSettings.addEventListener("click", function (e) {});
 // Increase and decrease temperature
 document.getElementById("increase").addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
-  const increaseRoomTemperature = room.increaseTemp;
-
-  if (room.currTemp < 32) {
-    increaseRoomTemperature();
+  const increaseRoomTemperature = room.increaseTemp(); //#fixed bug two (invoke increaseTemp instead of increaseRoomTemperature)
+  // console.log(increaseRoomTemperature());
+// 
+  if (room.currTemp <= 32) {
+    increaseRoomTemperature;
   }
 
   setIndicatorPoint(room.currTemp);
@@ -261,10 +265,10 @@ document.getElementById("increase").addEventListener("click", () => {
 
 document.getElementById("reduce").addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
-  const decreaseRoomTemperature = room.decreaseTemp;
+  const decreaseRoomTemperature = room.decreaseTemp();
 
   if (room.currTemp > 10) {
-    decreaseRoomTemperature();
+    decreaseRoomTemperature;
   }
 
   setIndicatorPoint(room.currTemp);
@@ -303,23 +307,34 @@ document.getElementById("save").addEventListener("click", () => {
   const warmInput = document.getElementById("warmInput");
   const errorSpan = document.querySelector(".error");
 
+console.log(+coolInput.value);
+console.log(+warmInput.value);
+
   if (coolInput.value && warmInput.value) {
+    errorSpan.style.display = "none";
+    // #fixed bug three (display error message only when temp is out of range)
+
     // Validate the data
-    if (coolInput.value < 10 || coolInput.value > 25) {
+    if (+coolInput.value < 10 || +coolInput.value > 25) {
       errorSpan.style.display = "block";
       errorSpan.innerText = "Enter valid temperatures (10° - 32°)";
+      return; // Exit early on error
     }
 
-    if (warmInput.value < 25 || warmInput.value > 32) {
+    if (Number(warmInput.value) < 25 || Number(warmInput.value) > 32) {
       errorSpan.style.display = "block";
       errorSpan.innerText = "Enter valid temperatures (10° - 32°)";
+      return; // Exit early on error
     }
+
     // Validation passed
     // Set current room's presets
     const currRoom = rooms.find((room) => room.name === selectedRoom);
 
-    currRoom.setColdPreset(coolInput.value);
-    currRoom.setWarmPreset(warmInput.value);
+    currRoom.setColdPreset(+coolInput.value);
+    currRoom.setWarmPreset(+warmInput.value);
+
+    console.log(currRoom);
 
     coolInput.value = "";
     warmInput.value = "";
@@ -348,7 +363,7 @@ const generateRooms = () => {
          
           <span class="room-status" style="display: ${
             room.airConditionerOn ? "" : "none"
-          }">${room.currTemp > 25 ? "Cooling room to: " : "Warming room to: "}${
+          }">${room.currTemp > 25 ? "Warming room to: " : " Cooling room to:"}${
       room.currTemp
     }°</span>
         </div>
