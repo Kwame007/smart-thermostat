@@ -155,9 +155,7 @@ const setInitialOverlay = () => {
     ".room"
   ).style.backgroundImage = `url('${rooms[0].image}')`;
 
-  document.querySelector(".room").style.backgroundImage = `${
-    rooms[0].currTemp < 25 ?  warmOverlay : coolOverlay
-  }, url('${rooms[0].image}')`;
+  document.querySelector(".room").style.backgroundImage = `url('${rooms[0].image}')`;
 };
 
 const setOverlay = (room) => {
