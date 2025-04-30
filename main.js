@@ -288,6 +288,7 @@ document.getElementById("reduce").addEventListener("click", () => {
   updateRoomUI(room);
 });
 
+
 const coolBtn = document.getElementById("cool");
 const warmBtn = document.getElementById("warm");
 
