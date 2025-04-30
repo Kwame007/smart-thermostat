@@ -156,6 +156,7 @@ const setInitialOverlay = () => {
   ).style.backgroundImage = `url('${rooms[0].image}')`;
 
   document.querySelector(".room").style.backgroundImage = `${
+ features/preset
     rooms[0].currTemp < 25 ?  coolOverlay :  warmOverlay//fixed bug four (show correct overlay)
   }, url('${rooms[0].image}')`;
 };
@@ -231,6 +232,7 @@ const setSelectedRoom = (selectedRoom) => {
 roomSelect.addEventListener("change", function () {
   selectedRoom = this.value;
 
+
   setSelectedRoom(selectedRoom);
 });
 
@@ -252,18 +254,15 @@ const updateRoomUI = (room) => {
 const defaultSettings = document.querySelector(".default-settings");
 defaultSettings.addEventListener("click", function (e) {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+  
   if(e.target.id === 'cool') {
-    
     room.setCurrTemp(room.coldPreset)
     updateRoomUI(room);
   }
 
 if(e.target.id === "warm") {
-
     room.setCurrTemp(room.warmPreset)
     updateRoomUI(room);
-  }
-
 });
 
 // Increase and decrease temperature
@@ -323,12 +322,14 @@ document.getElementById("save").addEventListener("click", () => {
     if (Number(coolInput.value) < 10 || Number(coolInput.value) > 25) {
       errorSpan.style.display = "block";
       errorSpan.innerText = "Enter valid temperatures (10° - 24°)";
+      
       return; // Exit early on error
     }
 
     if (Number(warmInput.value) < 25 || Number(warmInput.value) > 32) {
       errorSpan.style.display = "block";
       errorSpan.innerText = "Enter valid temperatures (25° - 32°)";
+
       return; // Exit early on error
     }
 
@@ -336,8 +337,10 @@ document.getElementById("save").addEventListener("click", () => {
     // Set current room's presets
     const currRoom = rooms.find((room) => room.name === selectedRoom);
 
+
     currRoom.setColdPreset(Number(coolInput.value));
     currRoom.setWarmPreset(Number(warmInput.value));
+
 
     console.log(currRoom);
 
