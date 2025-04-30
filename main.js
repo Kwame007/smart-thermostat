@@ -156,7 +156,6 @@ const setInitialOverlay = () => {
   ).style.backgroundImage = `url('${rooms[0].image}')`;
 
   document.querySelector(".room").style.backgroundImage = `${
- features/preset
     rooms[0].currTemp < 25 ?  coolOverlay :  warmOverlay//fixed bug four (show correct overlay)
   }, url('${rooms[0].image}')`;
 };
@@ -263,6 +262,7 @@ defaultSettings.addEventListener("click", function (e) {
 if(e.target.id === "warm") {
     room.setCurrTemp(room.warmPreset)
     updateRoomUI(room);
+}
 });
 
 // Increase and decrease temperature
