@@ -419,7 +419,7 @@ const generateRooms = () => {
 
   rooms.forEach((room) => {
     roomsHTML += `
-    <div class="room-control" id="${room.name}">
+     <div class="room-control" id="${room.name}">
           <div class="top">
             <h3 class="room-name">${room.name} - ${room.currTemp}°</h3>
             <button class="switch">
@@ -435,8 +435,8 @@ const generateRooms = () => {
             room.airConditionerOn ? "" : "none"
           }">${room.currTemp > 25 ? "Warming room to: " : " Cooling room to:"}${
       room.currTemp
-    }°</span>
-        </div>
+        }°</span>
+    </div>
     `;
   });
 
@@ -510,6 +510,24 @@ document.querySelector(".rooms-control").addEventListener("click", (e) => {
     warmBtn.style.backgroundColor = "#d9d9d9";
     
   }
+});
+
+// turn all AC's on
+document.querySelector("#addRoom").addEventListener("click", () => {
+  rooms.forEach((room) => {
+    room.toggleAircon();
+  });
+
+  // change btn text content
+  const allOn = rooms.every((room) => room.airConditionerOn);
+  const addText = document.querySelector(".add-text");
+
+  if (allOn) {
+    addText.textContent = "Turn all AC's off";
+  } else {
+    addText.textContent = "Turn all AC's on";
+  }
+  generateRooms();
 });
 
 // modal
