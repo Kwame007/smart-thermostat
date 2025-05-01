@@ -271,7 +271,7 @@ button {
   font-weight: 600;
 }
 
-.btn {
+.btn, #addRoom {
   display: flex;
   width: 100%;
   align-items: center;
