@@ -513,14 +513,14 @@ document.querySelector(".rooms-control").addEventListener("click", (e) => {
 });
 
 // turn all AC's on
-document.querySelector("#addRoom").addEventListener("click", () => {
+document.querySelector("#toggleAllAC").addEventListener("click", () => {
   rooms.forEach((room) => {
     room.toggleAircon();
   });
 
   // change btn text content
   const allOn = rooms.every((room) => room.airConditionerOn);
-  const addText = document.querySelector(".add-text");
+  const addText = document.querySelector(".toggle-text");
 
   if (allOn) {
     addText.textContent = "Turn all AC's off";
