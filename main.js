@@ -540,7 +540,7 @@ const openModal = function () {
   modal.classList.remove("hidden");
   overlay.classList.remove("hidden");
 };
-// open modal event
+
 openModalBtn.addEventListener("click", openModal);
 
 // handle submit
@@ -574,7 +574,5 @@ function handleSubmit(e) {
   generateRooms();
   closeModal();
 }
-
-
 // add room
 document.querySelector(".modal-form").addEventListener("submit", handleSubmit)
