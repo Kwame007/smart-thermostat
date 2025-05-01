@@ -31,7 +31,12 @@
       <div class="container animate__animated animate__fadeInUp">
         <div class="top-content">
           <h1 class="logo">Thermostat</h1>
-          <select id="rooms"></select>
+          <div class="group-flex">
+            <select id="rooms"></select>
+            <button class="btn btn-open">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            </button>
+          </div>
         </div>
         <!-- Interior card -->
         <div class="room">
@@ -113,17 +118,57 @@
             />
             <button id="save">Save</button>
             <button id="close"><ion-icon name="close"></ion-icon></button>
-
             <span class="error"></span>
           </div>
         </div>
       </div>
-
       <div
         class="container rooms-control animate__animated animate__fadeIn"
-      ></div>
+      >
+    <!-- add button to turn all ac's on -->
+    <!-- <div class="add"> -->
+      <button id="addRoom">
+        <ion-icon size="large" name="add-outline"></ion-icon>
+        Turn All AC's On
+      </button>
+    <!-- </div> -->
     </div>
 
+    <section class="modal hidden">
+      <form class="modal-form">
+        <div class="modal-header">
+          <button class="btn-close">⨉</button>
+        </div>
+        <div>
+          <h3>Add Room</h3>
+        </div>
+
+        <div class="group">
+          <label for="room">Room name</label>
+          <input type="room" id="room" placeholder="Room name" />
+        </div>
+        <div class="group">
+          <label for="temp">Initial temperature</label>
+          <input type="temp" id="temps" placeholder="Initial temperature" />
+        </div>
+
+        <div class="group-flex">
+          <div class="group">
+            <label for="start-time">Start time</label>
+            <input type="time" id="start-time" value="00:00"/>
+          </div>
+          <div class="group">
+            <label for="end-time">End time</label>
+            <input type="time" id="end-time" value="23:59"/>
+          </div>
+        </div>
+        <span class="info"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info-icon lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><small>Default time is 24 hours if not set</small></span>
+        <span class="errors modal-error hidden"><small>Please fill all fields</small></span>
+        <button class="btn" style="margin-top: 10px;">Save</button>
+      </form>
+    </section>
+    <div class="overlay hidden"></div>
+    
     <!-- Ionicons -->
     <script
       type="module"
