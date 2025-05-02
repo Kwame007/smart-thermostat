@@ -162,7 +162,7 @@ svg.point {
   margin: 0 0 20px 0;
 }
 
-.inputs {
+.inputs, .timer-inputs {
   margin: 0 0 20px 0;
   /* border: solid 1px pink; */
   display: flex;
@@ -170,7 +170,7 @@ svg.point {
   gap: 5px;
 }
 
-.inputs input {
+.inputs input, .timer-inputs input {
   padding: 8px 5px;
   width: 100px;
   border: none;
@@ -179,7 +179,7 @@ svg.point {
   outline: none;
 }
 
-.inputs #save {
+.inputs #save, .timer-inputs #timerSave {
   border: none;
   background-color: var(--cool-blue);
   color: #ffffff;
@@ -189,7 +189,7 @@ svg.point {
   cursor: pointer;
 }
 
-.inputs #close {
+.inputs #close, .timer-inputs #closes{
   border: none;
   background: none;
   font-size: 18px;
@@ -328,7 +328,7 @@ button {
 }
 
 
-#newPreset {
+#newPreset,#newTimer {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -344,6 +344,15 @@ button {
 
 #newPreset:hover {
   color: #6b7ff0;
+}
+
+.timer-inputs input{
+  display: block;
+}
+
+.edits {
+  display: flex;
+  gap: 10px;
 }
 
 #cool,

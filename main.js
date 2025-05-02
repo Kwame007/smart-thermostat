@@ -365,6 +365,7 @@ document.getElementById("reduce").addEventListener("click", () => {
 
 
 const inputsDiv = document.querySelector(".inputs");
+const timerDiv = document.querySelector(".timer-inputs");
 // Toggle preset inputs
 document.getElementById("newPreset").addEventListener("click", () => {
   if (inputsDiv.classList.contains("hidden")) {
@@ -372,9 +373,20 @@ document.getElementById("newPreset").addEventListener("click", () => {
   }
 });
 
+// Toggle timer inputs
+document.getElementById("newTimer").addEventListener("click", () => {
+  if (timerDiv.classList.contains("hidden")) {
+    timerDiv.classList.remove("hidden");
+  }
+});
+
 // close inputs
 document.getElementById("close").addEventListener("click", () => {
   inputsDiv.classList.add("hidden");
+});
+
+document.getElementById("closes").addEventListener("click", () => {
+  timerDiv.classList.add("hidden");
 });
 
 // handle preset input data
@@ -415,6 +427,51 @@ document.getElementById("save").addEventListener("click", () => {
     warmInput.value = "";
   }
 });
+
+const checkSchedule = () => {
+  const now = new Date();
+  const currentTime = now.toTimeString().slice(0, 5); // HH:MM
+  console.log(currentTime);
+
+  rooms.forEach((room) => {
+    if (room.startTime === currentTime) {
+      room.airConditionerOn = true;
+      console.log(`${room.name} AC turned ON at ${currentTime}`);
+    }
+
+    if (room.endTime === currentTime) {
+      room.airConditionerOn = false;
+      console.log(`${room.name} AC turned OFF at ${currentTime}`);
+    }
+  });
+
+  generateRooms(); // Update UI
+};
+
+let scheduleInterval = setInterval(checkSchedule, 10000);
+
+// Clear interval on page unload
+window.addEventListener("beforeunload", () => {
+  clearInterval(scheduleInterval);
+});
+
+
+// handle timer input data
+document.getElementById("timerSave").addEventListener("click", () => {
+  const startTime = document.getElementById("startTimeInput").value;
+  const endTime = document.getElementById("endTimeInput").value;
+
+  if (!startTime || !endTime) return alert("Please set both start and end times.");
+
+  const currRoom = rooms.find((room) => room.name === selectedRoom);
+  currRoom.startTime = startTime;
+  currRoom.endTime = endTime;
+
+  console.log(currRoom);
+
+  alert("Schedule saved!");
+});
+
 
 // Rooms Control
 // Generate rooms
