@@ -1,154 +1,203 @@
 // Room objects
+class Room {
+  constructor(name, currTemp, coldPreset, warmPreset, image, airConditionerOn, startTime, endTime) {
+    this.name = name;
+    this.currTemp = currTemp;
+    this.coldPreset = coldPreset;
+    this.warmPreset = warmPreset;
+    this.image = image;
+    this.airConditionerOn = airConditionerOn;
+    this.startTime = startTime;
+    this.endTime = endTime;
+  }
+
+  setCurrTemp(temp) {
+    this.currTemp = temp;
+  }
+
+  setColdPreset(newCold) {
+    this.coldPreset = newCold;
+  }
+
+  setWarmPreset(newWarm) {
+    this.warmPreset = newWarm;
+  }
+
+  decreaseTemp() {
+    this.currTemp--;
+  }
+
+  increaseTemp() {
+    this.currTemp++;
+  }
+
+  toggleAircon() {
+    this.airConditionerOn = !this.airConditionerOn;
+  }
+}
+
+// Example usage
 const rooms = [
-  {
-    name: "Living Room",
-    currTemp: 32,
-    coldPreset: 20,
-    warmPreset: 32,
-    image: "./assets/living-room.jpg",
-    airConditionerOn: false,
-    startTime: '16:30',
-    endTime: '20:00',
-
-    setCurrTemp(temp) {
-      this.currTemp = temp;
-    },
-
-    setColdPreset(newCold) {
-      this.coldPreset = newCold;
-    },
-
-    setWarmPreset(newWarm) {
-      this.warmPreset = newWarm;
-    },
-
-    decreaseTemp() {
-      this.currTemp--;
-    },
-
-    increaseTemp() {
-      this.currTemp++;
-    },
-    toggleAircon() {
-      this.airConditionerOn
-        ? (this.airConditionerOn = false)
-        : (this.airConditionerOn = true);
-    },
-  },
-  {
-    name: "Kitchen",
-    currTemp: 29,
-    coldPreset: 20,
-    warmPreset: 32,
-    image: "./assets/kitchen.jpg",
-    airConditionerOn: false,
-    startTime: '16:30',
-    endTime: '20:00',
-
-    setCurrTemp(temp) {
-      this.currTemp = temp;
-    },
-
-    setColdPreset(newCold) {
-      this.coldPreset = newCold;
-    },
-
-    setWarmPreset(newWarm) {
-      this.warmPreset = newWarm;
-    },
-
-    decreaseTemp() {
-      this.currTemp--;
-    },
-
-    increaseTemp() {
-      this.currTemp++;
-    },
-    toggleAircon() {
-      this.airConditionerOn
-        ? (this.airConditionerOn = false)
-        : (this.airConditionerOn = true);
-    },
-  },
-  {
-    name: "Bathroom",
-    currTemp: 30,
-    coldPreset: 20,
-    warmPreset: 32,
-    image: "./assets/bathroom.jpg",
-    airConditionerOn: false,
-    startTime: '16:30',
-    endTime: '20:00',
-
-    setCurrTemp(temp) {
-      this.currTemp = temp;
-    },
-
-    setColdPreset(newCold) {
-      this.coldPreset = newCold;
-    },
-
-    setWarmPreset(newWarm) {
-      this.warmPreset = newWarm;
-    },
-
-    decreaseTemp() {
-      this.currTemp--;
-    },
-
-    increaseTemp() {
-      this.currTemp++;
-    },
-    toggleAircon() {
-      this.airConditionerOn
-        ? (this.airConditionerOn = false)
-        : (this.airConditionerOn = true);
-    },
-  },
-  {
-    name: "Bedroom",
-    currTemp: 31,
-    coldPreset: 20,
-    warmPreset: 32,
-    image: "./assets/bedroom.jpg",
-    airConditionerOn: false,
-    startTime: '16:30',
-    endTime: '20:00',
-
-    setCurrTemp(temp) {
-      this.currTemp = temp;
-    },
-
-    setColdPreset(newCold) {
-      this.coldPreset = newCold;
-    },
-
-    setWarmPreset(newWarm) {
-      this.warmPreset = newWarm;
-    },
-
-    decreaseTemp() {
-      this.currTemp--;
-    },
-
-    increaseTemp() {
-      this.currTemp++;
-    },
-    toggleAircon() {
-      this.airConditionerOn
-        ? (this.airConditionerOn = false)
-        : (this.airConditionerOn = true);
-    },
-  },
+  new Room("Living Room", 32, 20, 32, "./assets/living-room.jpg", false, "16:30", "20:00"),
+  new Room("Kitchen", 29, 20, 32, "./assets/kitchen.jpg", false, "16:30", "20:00"),
+  new Room("Bathroom", 30, 20, 32, "./assets/bathroom.jpg", false, "16:30", "20:00"),
+  new Room("Bedroom", 31, 20, 32, "./assets/bedroom.jpg", false, "16:30", "20:00"),
 ];
 
-const warmOverlay= `linear-gradient(
+// Initialize selectedRoom after defining the rooms array
+let selectedRoom;
+selectedRoom = rooms[0].name;
+
+// const rooms = [
+//   {
+//     name: "Living Room",
+//     currTemp: 32,
+//     coldPreset: 20,
+//     warmPreset: 32,
+//     image: "./assets/living-room.jpg",
+//     airConditionerOn: false,
+//     startTime: '16:30',
+//     endTime: '20:00',
+
+//     setCurrTemp(temp) {
+//       this.currTemp = temp;
+//     },
+
+//     setColdPreset(newCold) {
+//       this.coldPreset = newCold;
+//     },
+
+//     setWarmPreset(newWarm) {
+//       this.warmPreset = newWarm;
+//     },
+
+//     decreaseTemp() {
+//       this.currTemp--;
+//     },
+
+//     increaseTemp() {
+//       this.currTemp++;
+//     },
+//     toggleAircon() {
+//       this.airConditionerOn
+//         ? (this.airConditionerOn = false)
+//         : (this.airConditionerOn = true);
+//     },
+//   },
+//   {
+//     name: "Kitchen",
+//     currTemp: 29,
+//     coldPreset: 20,
+//     warmPreset: 32,
+//     image: "./assets/kitchen.jpg",
+//     airConditionerOn: false,
+//     startTime: '16:30',
+//     endTime: '20:00',
+
+//     setCurrTemp(temp) {
+//       this.currTemp = temp;
+//     },
+
+//     setColdPreset(newCold) {
+//       this.coldPreset = newCold;
+//     },
+
+//     setWarmPreset(newWarm) {
+//       this.warmPreset = newWarm;
+//     },
+
+//     decreaseTemp() {
+//       this.currTemp--;
+//     },
+
+//     increaseTemp() {
+//       this.currTemp++;
+//     },
+//     toggleAircon() {
+//       this.airConditionerOn
+//         ? (this.airConditionerOn = false)
+//         : (this.airConditionerOn = true);
+//     },
+//   },
+//   {
+//     name: "Bathroom",
+//     currTemp: 30,
+//     coldPreset: 20,
+//     warmPreset: 32,
+//     image: "./assets/bathroom.jpg",
+//     airConditionerOn: false,
+//     startTime: '16:30',
+//     endTime: '20:00',
+
+//     setCurrTemp(temp) {
+//       this.currTemp = temp;
+//     },
+
+//     setColdPreset(newCold) {
+//       this.coldPreset = newCold;
+//     },
+
+//     setWarmPreset(newWarm) {
+//       this.warmPreset = newWarm;
+//     },
+
+//     decreaseTemp() {
+//       this.currTemp--;
+//     },
+
+//     increaseTemp() {
+//       this.currTemp++;
+//     },
+//     toggleAircon() {
+//       this.airConditionerOn
+//         ? (this.airConditionerOn = false)
+//         : (this.airConditionerOn = true);
+//     },
+//   },
+//   {
+//     name: "Bedroom",
+//     currTemp: 31,
+//     coldPreset: 20,
+//     warmPreset: 32,
+//     image: "./assets/bedroom.jpg",
+//     airConditionerOn: false,
+//     startTime: '16:30',
+//     endTime: '20:00',
+
+//     setCurrTemp(temp) {
+//       this.currTemp = temp;
+//     },
+
+//     setColdPreset(newCold) {
+//       this.coldPreset = newCold;
+//     },
+
+//     setWarmPreset(newWarm) {
+//       this.warmPreset = newWarm;
+//     },
+
+//     decreaseTemp() {
+//       this.currTemp--;
+//     },
+
+//     increaseTemp() {
+//       this.currTemp++;
+//     },
+//     toggleAircon() {
+//       this.airConditionerOn
+//         ? (this.airConditionerOn = false)
+//         : (this.airConditionerOn = true);
+//     },
+//   },
+// ];
+
+const coolOverlay= `linear-gradient(
     to bottom,
     rgba(141, 158, 247, 0.2),
     rgba(194, 197, 215, 0.1)
   )`;
 
-const coolOverlay = `linear-gradient(to bottom, rgba(236, 96, 98, 0.2), rgba(248, 210, 211, 0.13))`;
+const warmOverlay = `linear-gradient(to bottom, rgba(236, 96, 98, 0.2), rgba(248, 210, 211, 0.13))`;
 
 const setInitialOverlay = () => {
   document.querySelector(
@@ -156,13 +205,13 @@ const setInitialOverlay = () => {
   ).style.backgroundImage = `url('${rooms[0].image}')`;
 
   document.querySelector(".room").style.backgroundImage = `${
-    rooms[0].currTemp < 25 ?  warmOverlay : coolOverlay //fixed bug four (show correct overlay)
+    rooms[0].currTemp < 25 ?  coolOverlay :  warmOverlay//fixed bug four (show correct overlay)
   }, url('${rooms[0].image}')`;
 };
 
 const setOverlay = (room) => {
   document.querySelector(".room").style.backgroundImage = `${
-    room.currTemp < 25 ? warmOverlay : coolOverlay
+    room.currTemp < 25 ? coolOverlay :  warmOverlay
   }, url('${room.image}')`;
 };
 
@@ -192,7 +241,7 @@ const roomSelect = document.getElementById("rooms");
 
 const currentTemp = document.getElementById("temp");
 
-let selectedRoom = rooms[0].name;
+// let selectedRoom = rooms[0].name;
 
 
 
@@ -230,29 +279,13 @@ const setSelectedRoom = (selectedRoom) => {
 
 roomSelect.addEventListener("change", function () {
   selectedRoom = this.value;
-
+  const room = rooms.find((room) => room.name === selectedRoom);
 
   setSelectedRoom(selectedRoom);
+  updateRoomUI(room);
 });
 
-
-// Set preset temperatures
-const defaultSettings = document.querySelector(".default-settings");
-defaultSettings.addEventListener("click", function (e) {});
-
-// Increase and decrease temperature
-document.getElementById("increase").addEventListener("click", () => {
-  const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
-
-  if (!room) return;
-
-  const increaseRoomTemperature = room.increaseTemp(); //#fixed bug two (invoke increaseTemp instead of increaseRoomTemperature)
-  // console.log(increaseRoomTemperature());
-// 
-  if (room.currTemp <= 32) {
-    increaseRoomTemperature;
-  }
-
+const updateRoomUI = (room) => {
   setIndicatorPoint(room.currTemp);
   currentTemp.textContent = `${room.currTemp}°`;
 
@@ -263,7 +296,54 @@ document.getElementById("increase").addEventListener("click", () => {
   warmBtn.style.backgroundColor = "#d9d9d9";
   coolBtn.style.backgroundColor = "#d9d9d9";
 
+  // update room select
+    const roomSelect = document.querySelector("#rooms");
+    roomSelect.value = room.name;
+
   document.querySelector(".currentTemp").innerText = `${room.currTemp}°`;
+};
+
+const coolBtn = document.getElementById("cool");
+const warmBtn = document.getElementById("warm");
+
+
+// Set preset temperatures
+const defaultSettings = document.querySelector(".default-settings");
+defaultSettings.addEventListener("click", function (e) {
+  const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+
+  
+  if(e.target.id === 'cool') {
+    room.setCurrTemp(room.coldPreset)
+    updateRoomUI(room);
+
+    coolBtn.style.backgroundColor = "rgba(141, 158, 247,0.2)";
+    warmBtn.style.backgroundColor = "#d9d9d9";
+  }
+
+if(e.target.id === "warm") {
+    room.setCurrTemp(room.warmPreset)
+    updateRoomUI(room);
+
+    warmBtn.style.backgroundColor = "rgba(236, 96, 98,0.2)";
+    coolBtn.style.backgroundColor = "#d9d9d9";
+
+}
+});
+
+// Increase and decrease temperature
+document.getElementById("increase").addEventListener("click", () => {
+  const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+
+  if (!room) return;
+  
+  const increaseRoomTemperature = room.increaseTemp(); //#fixed bug two (invoke increaseTemp instead of increaseRoomTemperature)
+
+  if (room.currTemp <= 32) {
+    increaseRoomTemperature;
+  }
+
+  updateRoomUI(room);
 });
 
 document.getElementById("reduce").addEventListener("click", () => {
@@ -277,21 +357,11 @@ document.getElementById("reduce").addEventListener("click", () => {
     decreaseRoomTemperature;
   }
 
-  setIndicatorPoint(room.currTemp);
-  currentTemp.textContent = `${room.currTemp}°`;
-
-  generateRooms();
-
-  setOverlay(room);
-
-  warmBtn.style.backgroundColor = "#d9d9d9";
-  coolBtn.style.backgroundColor = "#d9d9d9";
-
-  document.querySelector(".currentTemp").innerText = `${room.currTemp}°`;
+  updateRoomUI(room);
 });
 
-const coolBtn = document.getElementById("cool");
-const warmBtn = document.getElementById("warm");
+
+
 
 
 const inputsDiv = document.querySelector(".inputs");
@@ -313,8 +383,6 @@ document.getElementById("save").addEventListener("click", () => {
   const warmInput = document.getElementById("warmInput");
   const errorSpan = document.querySelector(".error");
 
-console.log(+coolInput.value);
-console.log(+warmInput.value);
 
   if (coolInput.value && warmInput.value) {
     errorSpan.style.display = "none";
@@ -322,14 +390,17 @@ console.log(+warmInput.value);
 
     // Validate the data
     if (Number(coolInput.value < 10) || Number(coolInput.value > 25)) {
+
       errorSpan.style.display = "block";
-      errorSpan.innerText = "Enter valid temperatures (10° - 32°)";
+      errorSpan.innerText = "Enter valid temperatures (10° - 24°)";
+      
       return; // Exit early on error
     }
 
     if (Number(warmInput.value) < 25 || Number(warmInput.value) > 32) {
       errorSpan.style.display = "block";
-      errorSpan.innerText = "Enter valid temperatures (10° - 32°)";
+      errorSpan.innerText = "Enter valid temperatures (25° - 32°)";
+
       return; // Exit early on error
     }
 
@@ -337,10 +408,8 @@ console.log(+warmInput.value);
     // Set current room's presets
     const currRoom = rooms.find((room) => room.name === selectedRoom);
 
-    currRoom.setColdPreset(+coolInput.value);
-    currRoom.setWarmPreset(+warmInput.value);
-
-    console.log(currRoom);
+    currRoom.setColdPreset(Number(coolInput.value));
+    currRoom.setWarmPreset(Number(warmInput.value));
 
     coolInput.value = "";
     warmInput.value = "";
@@ -355,7 +424,7 @@ const generateRooms = () => {
 
   rooms.forEach((room) => {
     roomsHTML += `
-    <div class="room-control" id="${room.name}">
+     <div class="room-control" id="${room.name}">
           <div class="top">
             <h3 class="room-name">${room.name} - ${room.currTemp}°</h3>
             <button class="switch">
@@ -371,8 +440,8 @@ const generateRooms = () => {
             room.airConditionerOn ? "" : "none"
           }">${room.currTemp > 25 ? "Warming room to: " : " Cooling room to:"}${
       room.currTemp
-    }°</span>
-        </div>
+        }°</span>
+    </div>
     `;
   });
 
@@ -434,5 +503,99 @@ document.querySelector(".rooms-control").addEventListener("click", (e) => {
 
   if (e.target.classList.contains("room-name")) {
     setSelectedRoom(e.target.parentNode.parentNode.id);
+   
+
+    // update room select
+    const roomSelect = document.querySelector("#rooms");
+    roomSelect.value = e.target.parentNode.parentNode.id;
+
+    selectedRoom = e.target.parentNode.parentNode.id;
+
+    coolBtn.style.backgroundColor = "#d9d9d9";
+    warmBtn.style.backgroundColor = "#d9d9d9";
+    
   }
 });
+
+// turn all AC's on
+document.querySelector("#toggleAllAC").addEventListener("click", () => {
+  rooms.forEach((room) => {
+    room.toggleAircon();
+  });
+
+  // change btn text content
+  const allOn = rooms.every((room) => room.airConditionerOn);
+  const addText = document.querySelector(".toggle-text");
+
+  if (allOn) {
+    addText.textContent = "Turn all AC's off";
+  } else {
+    addText.textContent = "Turn all AC's on";
+  }
+  generateRooms();
+});
+
+// modal
+const modal = document.querySelector(".modal");
+const overlay = document.querySelector(".overlay");
+const openModalBtn = document.querySelector(".btn-open");
+const closeModalBtn = document.querySelector(".btn-close");
+
+// close modal function
+const closeModal = function () {
+  modal.classList.add("hidden");
+  overlay.classList.add("hidden");
+};
+
+// close the modal when the close button and overlay is clicked
+closeModalBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", closeModal);
+
+// close modal when the Esc key is pressed
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+    closeModal();
+  }
+});
+
+// open modal function
+const openModal = function () {
+  modal.classList.remove("hidden");
+  overlay.classList.remove("hidden");
+};
+
+openModalBtn.addEventListener("click", openModal);
+
+// handle submit
+function handleSubmit(e) {
+  e.preventDefault();
+  const roomName = document.querySelector("#room").value;
+  const roomTemp = document.querySelector("#temps").value;
+  const startTime = document.querySelector("#start-time").value;
+  const endTime = document.querySelector("#end-time").value;
+
+  const errorSpan = document.querySelector(".modal-error");
+  if (!roomName || !roomTemp) {
+    errorSpan.style.display = "block";
+    return;
+  }
+  errorSpan.style.display = "none";
+
+  const room = new Room(roomName, Number(roomTemp),20, 32, "https://picsum.photos/800/600", false, startTime, endTime);
+
+  // Add new options from rooms array
+  rooms.push(room);
+  roomSelect.innerHTML = null
+
+  rooms.forEach((room) => {
+  const option = document.createElement("option");
+  option.value = room.name; // #fixed bug one (called room.name instead of room)
+  option.textContent = room.name;
+  roomSelect.appendChild(option);
+});
+
+  generateRooms();
+  closeModal();
+}
+// add room
+document.querySelector(".modal-form").addEventListener("submit", handleSubmit)
