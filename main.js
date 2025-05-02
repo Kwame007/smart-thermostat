@@ -335,7 +335,8 @@ if(e.target.id === "warm") {
 document.getElementById("increase").addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
 
-  console.log(room);
+  if (!room) return;
+  
   const increaseRoomTemperature = room.increaseTemp(); //#fixed bug two (invoke increaseTemp instead of increaseRoomTemperature)
 
   if (room.currTemp <= 32) {
@@ -347,6 +348,9 @@ document.getElementById("increase").addEventListener("click", () => {
 
 document.getElementById("reduce").addEventListener("click", () => {
   const room = rooms.find((currRoom) => currRoom.name === selectedRoom);
+
+  if (!room) return;
+
   const decreaseRoomTemperature = room.decreaseTemp();
 
   if (room.currTemp > 10) {
@@ -385,7 +389,8 @@ document.getElementById("save").addEventListener("click", () => {
     // #fixed bug three (display error message only when temp is out of range)
 
     // Validate the data
-    if (Number(coolInput.value) < 10 || Number(coolInput.value) > 25) {
+    if (Number(coolInput.value < 10) || Number(coolInput.value > 25)) {
+
       errorSpan.style.display = "block";
       errorSpan.innerText = "Enter valid temperatures (10° - 24°)";
       
